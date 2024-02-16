@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardest Fitsness Tasks - Login</title>
+    <style>
+                body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            max-width: 400px;
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Hardest Fitness Tasks - Login</h2>
+        <form id="loginForm" onsubmit="return false;">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button onclick="login()" id="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        function login() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // Retrieve hashed password and salt from local storage
+            const storedUsername = localStorage.getItem("registeredUsername");
+            const storedHashedPassword = localStorage.getItem("hashedPassword");
+            const storedSalt = localStorage.getItem("salt");
+
+            // Check if the entered username matches the registered username
+            if (username !== storedUsername) {
+                alert("Invalid username. Please try again.");
+                return;
+            }
+
+            // Hash the entered password with the stored salt
+            crypto.subtle.digest('SHA-256', new TextEncoder().encode(password + storedSalt))
+                .then(digestBuffer => {
+                    const digestArray = Array.from(new Uint8Array(digestBuffer));
+                    const enteredPasswordHash = digestArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+
+                    // Check if the entered password hash matches the stored hashed password
+                    if (enteredPasswordHash === storedHashedPassword) {
+                        alert("Login successful!");
+
+                        // Redirect to the quest page or perform other actions.
+                        window.location.href = "index.html";
+                    } else {
+                        alert("Invalid password. Please try again.");
+                    }
+                })
+                .catch(error => console.error('Error hashing entered password:', error));
+        }
+    </script>
+</body>
+</html>

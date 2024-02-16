@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardest Fitness Tasks</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .quest-container {
+            max-width: 800px;
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #555;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="quest-container">
+        <h2>Hardest Fitness Tasks</h2>
+        <sub id="subtitle">Professional only.(Refresh page to get new tasks)</sub><button onclick="window.location.reload()">refresh</button>
+        <ul id="questsList"></ul>
+        <footer>&copy; 2024 Hardest Fitness Tasks</footer>
+    </div>
+
+    <script>
+        // Function to generate a random number within a range
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // Function to generate a quest
+        function generateQuest() {
+            const fitnessTasks = [
+            "Run 10 miles without stopping.",
+"Perform 200 push-ups consecutively.",
+"Complete 100 burpees in a single set.",
+"Swim continuously for 1 hour.",
+"Climb 100 flights of stairs.",
+"Do 500 squats without a break.",
+"Hold a plank for 10 minutes.",
+"Perform 100 pull-ups without rest.",
+"Run up and down a hill 50 times.",
+"Complete 300 jumping jacks non-stop.",
+"Swim for 2 kilometers without taking a break.",
+"Do 200 sit-ups continuously.",
+"Cycle for 50 miles without a break.",
+"Run a marathon (26.2 miles).",
+"Perform 1,000 jumping squats.",
+"Complete 150 push-ups on fingertips.",
+"Hold a handstand for 5 minutes.",
+"Swim 1 mile using only butterfly stroke.",
+"Run 50 kilometers without stopping.",
+"Do 500 mountain climbers.",
+"Complete 200 tricep dips.",
+"Perform 100 pistol squats on each leg.",
+"Hold a plank on one arm for 5 minutes.",
+"Swim for 3 kilometers without taking a break.",
+"Run up and down 100 floors of a building.",
+"Do 300 push-ups on knuckles.",
+"Perform 100 burpees with a push-up.",
+"Complete 500 bicycle crunches.",
+"Swim 2 miles using only breaststroke.",
+"Run 100 kilometers without stopping.",
+"Do 1,000 jumping lunges.",
+"Hold a headstand for 10 minutes.",
+"Swim for 4 kilometers without taking a break.",
+"Perform 200 hand-release push-ups.",
+"Run up and down 150 floors of a building.",
+"Do 500 leg raises.",
+"Complete 300 pull-ups in a single session.",
+"Swim 3 miles using only backstroke.",
+"Run 200 kilometers without stopping.",
+"Perform 1,000 tuck jumps.",
+"Hold a planche position for 5 minutes.",
+"Swim for 5 kilometers without taking a break.",
+"Do 500 box jumps.",
+"Complete 400 push-ups with feet elevated.",
+"Run up and down 200 floors of a building.",
+"Do 1,000 Russian twists.",
+"Perform 200 one-arm push-ups.",
+"Swim 4 miles using only freestyle.",
+"Run 250 kilometers without stopping.",
+"Complete 1,000 jumping squats with a twist.",
+"Hold a handstand push-up for 5 minutes.",
+"Swim for 6 kilometers without taking a break.",
+"Do 500 plank-to-push-ups.",
+"Run up and down 250 floors of a building.",
+"Perform 300 butterfly stroke laps.",
+"Complete 200 clapping push-ups.",
+"Swim 5 miles using only sidestroke.",
+"Run 300 kilometers without stopping.",
+"Do 1,000 side plank hip dips.",
+"Hold a human flag for 2 minutes.",
+"Swim for 7 kilometers without taking a break.",
+"Do 500 Hindu squats.",
+"Run up and down 300 floors of a building.",
+"Complete 400 hanging leg raises.",
+"Perform 300 inverted rows.",
+"Swim 6 miles using only doggy paddle.",
+"Run 350 kilometers without stopping.",
+"Do 1,000 broad jumps.",
+"Hold a back lever for 3 minutes.",
+"Swim for 8 kilometers without taking a break.",
+"Do 500 dragon flags.",
+"Run up and down 350 floors of a building.",
+"Complete 200 muscle-ups.",
+"Perform 500 plank jacks.",
+"Swim 7 miles using only breaststroke.",
+"Run 400 kilometers without stopping.",
+"Do 1,000 box jump burpees.",
+"Hold a flagpole position for 2 minutes.",
+"Swim for 9 kilometers without taking a break.",
+"Do 500 pistol squats with a jump.",
+"Run up and down 400 floors of a building.",
+"Complete 300 handstand push-ups.",
+"Perform 400 chest-to-bar pull-ups.",
+"Swim 8 miles using only backstroke.",
+"Run 450 kilometers without stopping.",
+"Do 1,000 plank toe taps.",
+"Hold a V-sit for 5 minutes.",
+"Swim for 10 kilometers without taking a break.",
+"Do 500 explosive push-ups.",
+"Run up and down 450 floors of a building.",
+"Complete 200 wall walks.",
+"Perform 500 knees-to-elbows.",
+"Swim 9 miles using only sidestroke.",
+"Run 500 kilometers without stopping.",
+"Do 1,000 jumping lunges with twists.",
+"Hold a planche push-up for 2 minutes.",
+"Swim for 11 kilometers without taking a break.",
+"Do 500 plank pikes.",
+"Run up and down 500 floors of a building.",
+"Complete 300 burpee pull-ups."
+                // Add more challenging fitness tasks as needed
+            ];
+
+            const xpReward = getRandomInt(10, 30);
+            const goldReward = getRandomInt(5, 15);
+            const taskIndex = getRandomInt(0, fitnessTasks.length - 1);
+            const task = fitnessTasks[taskIndex];
+
+            return {
+                task: task,
+                xpReward: xpReward,
+                goldReward: goldReward
+            };
+        }
+
+        // Function to display quests on the page
+        function displayQuests() {
+            const questsList = document.getElementById("questsList");
+
+            for (let i = 1; i <= 10; i++) {
+                const quest = generateQuest();
+
+                const li = document.createElement("li");
+                li.innerHTML = `<strong>Quest ${i}:</strong> ${quest.task} - 
+                                XP: ${quest.xpReward}, Gold: ${quest.goldReward}
+                                <button onclick="completeQuest(${quest.xpReward}, ${quest.goldReward})">Complete</button>`;
+
+                questsList.appendChild(li);
+            }
+        }
+
+        // Function to simulate completing a quest
+        function completeQuest(xpReward, goldReward) {
+            alert(`Quest completed! Gained ${xpReward} XP and ${goldReward} gold.`);
+        }
+
+        // Display quests when the page loads
+        displayQuests();
+    </script>
+</body>
+</html>
